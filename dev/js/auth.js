@@ -6,6 +6,8 @@ $(function() {
     e.preventDefault();
 
     $('input').val('');
+    $('p.error').remove();
+    $('input').removeClass('error');
 
     if (flag) {
       flag = false;
@@ -27,6 +29,8 @@ $(function() {
   //register
   $('.register-button').on('click', function(e) {
     e.preventDefault();
+    $('p.error').remove();
+    $('input').removeClass('error');
 
     var data = {
       login: $('#register-login').val(),
@@ -49,7 +53,40 @@ $(function() {
           });
         }
       } else {
-        $('.register h2').after('<p class="success">Отлично!</p');
+        //$('.register h2').after('<p class="success">Отлично!</p');
+        $(location).attr('href', '/');
+      }
+    });
+  });
+  //login
+  $('.login-button').on('click', function(e) {
+    e.preventDefault();
+    $('p.error').remove();
+    $('input').removeClass('error');
+
+    var data = {
+      login: $('#login-login').val(),
+      password: $('#login-password').val(),
+      passwordConfirm: $('#login-password-confirm').val()
+    };
+
+    $.ajax({
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: '/api/auth/login'
+    }).done(function(data) {
+      if (!data.ok) {
+        $('p.error').hide();
+        $('.login h2').after('<p class="error">' + data.error + '</p');
+        if (data.fields) {
+          data.fields.forEach(function(item) {
+            $('input[name=' + item + ']').addClass('error');
+          });
+        }
+      } else {
+        //$('.login h2').after('<p class="success">Отлично!</p');
+        $(location).attr('href', '/');
       }
     });
   });
