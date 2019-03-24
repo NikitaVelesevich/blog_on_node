@@ -5,7 +5,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 const plumber = require('gulp-plumber');
 const concat = require('gulp-concat');
-const uglify = require('gulp-uglifyjs')
+const uglify = require('gulp-uglifyjs');
 /*eslint-enable*/
 
 gulp.task('scss', () => {
@@ -23,9 +23,11 @@ gulp.task('scss', () => {
 });
 
 gulp.task('scripts', () =>
-  gulp 
+  gulp
     .src([
-      'dev/js/auth.js'
+      'dev/js/auth.js',
+      'dev/js/post.js',
+      'node_modules/medium-editor/dist/js/medium-editor.min.js'
     ])
     .pipe(concat('scripts.js'))
     .pipe(uglify())
