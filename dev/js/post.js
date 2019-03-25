@@ -8,12 +8,18 @@ $(function() {
     }
   });
 
+  //clear
+  $('.post-form input, #post-body').on('focus', function() {
+    $('p.error').remove();
+    $('input, div').removeClass('error');
+  });
+
   //publish
   $('.publish-button').on('click', function(e) {
     e.preventDefault();
 
     var data = {
-      tittle: $('#post-tittle').val(),
+      title: $('#post-title').val(),
       body: $('#post-body').html()
     };
 
@@ -25,15 +31,15 @@ $(function() {
     }).done(function(data) {
       console.log(data);
       if (!data.ok) {
-        // $('.register h2').after('<p class="error">' + data.error + '</p>');
-        // if (data.fields) {
-        //   data.fields.forEach(function(item) {
-        //     $('input[name=' + item + ']').addClass('error');
-        //   });
-        // }
+        $('.post-form h2').after('<p class="error">' + data.error + '</p>');
+        if (data.fields) {
+          data.fields.forEach(function(item) {
+            $('#post-' + item).addClass('error');
+          });
+        }
       } else {
         // $('.register h2').after('<p class="success">Отлично!</p>');
-        //$(location).attr('href', '/');
+        $(location).attr('href', '/');
       }
     });
   });

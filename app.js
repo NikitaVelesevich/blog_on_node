@@ -48,7 +48,7 @@ app.use(
   express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist'))
 );
 
-// routers
+// routes
 app.get('/', (req, res) => {
   const id = req.session.userId;
   const login = req.session.userLogin;
