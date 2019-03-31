@@ -2,16 +2,14 @@
 <div class="main">
   <div class="container">
     <div class="content">
+      <% for (var i = 0; i < posts.length; i++){ %>
       <div class="post">
         <div class="top">
-          <h2>Заголовок поста</h2>
+          <h2><%= posts[i].title %></h2>
         </div>
         <div class="body">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur, placeat consectetur non minima tempore sunt. Maxime
-            nisi, blanditiis accusamus fugiat dolores quidem molestias corporis
-            delectus, consectetur debitis quisquam quo amet.
+            <%= posts[i].body %>
           </p>
         </div>
         <div class="bottom">
@@ -19,22 +17,16 @@
           <a href="/">Комментарий</a>
         </div>
       </div>
-      <div class="post">
-        <div class="top">
-          <h2>Заголовок поста</h2>
-        </div>
-        <div class="body">
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam
-            iure dolorum porro commodi, deserunt voluptatem vel velit quod
-            dolores omnis est perferendis odio magnam at ad, nulla, cumque sunt
-            fugit?
-          </p>
-        </div>
-        <div class="bottom">
-          <div class="author">Автор: <a href="/">ДаникДура</a></div>
-          <a href="/">Комментарий</a>
-        </div>
+      <% } %>
+
+      <div class="pagination">
+        <% if(current > 2){ %>
+        <a class="new" href="/archive/<%= Number(current) - 1 %>">←К новым </a>
+        <% } %> <% if(current == 2){ %>
+        <a class="new" href="/"> ←На главную</a>
+        <% } %> <% if(pages > 0 && current < pages){ %>
+        <a class="old" href="/archive/<%= Number(current) + 1 %>">К старым →</a>
+        <% } %>
       </div>
     </div>
     <% include layout/sidebar.ejs %>

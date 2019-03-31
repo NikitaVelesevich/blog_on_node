@@ -136,7 +136,7 @@ router.post('/login', (req, res) => {
   }
 });
 
-// GET for logout
+//GET for logout
 router.get('/logout', (req, res) => {
   if (req.session) {
     // delete session object
