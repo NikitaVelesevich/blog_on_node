@@ -24,7 +24,7 @@ const schema = new Schema(
 
 schema.plugin(
   URLSlugs('title', {
-    fields: 'url',
+    field: 'url',
     generator: text => tr.slugify(text)
   })
 );
